@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MARGA GW | OpTes Shotgun 2 Only Custom Room</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a0a00, #2d1a00, #3d2600);
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Header - Warna Kuning */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .glow-text {
+            font-size: 4em;
+            margin-bottom: 10px;
+            animation: glowPulse 2s infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffaa00; }
+            50% { text-shadow: 0 0 25px #ffff00, 0 0 50px #ffcc00; }
+        }
+        
+        .header h1 {
+            font-size: 4em;
+            background: linear-gradient(135deg, #ffcc00, #ffaa00, #ffdd55, #ffcc00);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 10px;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .mode-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffcc00, #ff8800);
+            border-radius: 30px;
+            padding: 12px 35px;
+            font-size: 1.4em;
+            margin-top: 15px;
+            color: #1a0a00;
+            font-weight: bold;
+            box-shadow: 0 0 25px rgba(255,204,0,0.6);
+            letter-spacing: 3px;
+        }
+        
+        .header p {
+            color: #ffcc00;
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+        
+        /* Admin Cards - Warna Kuning */
+        .admin-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .admin-card {
+            background: linear-gradient(135deg, rgba(255,204,0,0.15), rgba(255,136,0,0.1));
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid #ffcc00;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .admin-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,204,0,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .admin-card:hover::before {
+            opacity: 1;
+        }
+        
+        .admin-card:hover {
+            transform: translateY(-8px);
+            border-color: #ffff00;
+            box-shadow: 0 15px 40px rgba(255,204,0,0.4);
+        }
+        
+        .admin-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ffcc00, #ff8800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 3.5em;
+            box-shadow: 0 0 20px rgba(255,204,0,0.5);
+        }
+        
+        .admin-name {
+            font-size: 2em;
+            background: linear-gradient(135deg, #ffcc00, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+        
+        .admin-number {
+            color: #ffcc00;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .wa-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .wa-btn:hover {
+            transform: scale(1.05);
+            background: #128C7E;
+            box-shadow: 0 5px 15px rgba(37,211,102,0.3);
+        }
+        
+        /* Form Section - Kuning */
+        .form-section {
+            background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,136,0,0.05));
+            border-radius: 25px;
+            padding: 35px;
+            margin-bottom: 40px;
+            border: 2px solid #ffcc00;
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-title {
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .form-title span {
+            background: linear-gradient(135deg, #ffcc00, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            margin: 10px 0;
+            border: 2px solid #ffcc00;
+            border-radius: 12px;
+            background: #1a0a00;
+            color: #ffcc00;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #886622;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ffff00;
+            box-shadow: 0 0 15px rgba(255,204,0,0.5);
+            background: #2a1500;
+        }
+        
+        select option {
+            background: #1a0a00;
+            color: #ffcc00;
+        }
+        
+        .btn-opTes {
+            background: linear-gradient(135deg, #ffcc00, #ff8800);
+            color: #1a0a00;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 25px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .btn-opTes:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(255,204,0,0.5);
+        }
+        
+        /* Rules Section - Kuning */
+        .rules-section {
+            background: linear-gradient(135deg, rgba(255,204,0,0.1), rgba(255,136,0,0.05));
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 2px solid #ffcc00;
+        }
+        
+        .rules-section h3 {
+            color: #ffcc00;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .rules-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 15px;
+        }
+        
+        .rules-box h4 {
+            color: #ffaa00;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            border-left: 4px solid #ffcc00;
+            padding-left: 10px;
+        }
+        
+        .rules-section ul, .rules-section ol {
+            color: #ffdd99;
+            padding-left: 20px;
+        }
+        
+        .rules-section li {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .hero-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .hero-badge {
+            background: linear-gradient(135deg, #ffcc00, #ff8800);
+            color: #1a0a00;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .warning-text {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        
+        /* Result Lists */
+        .result-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .result-card {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid #ffcc00;
+            transition: 0.3s;
+        }
+        
+        .result-card:hover {
+            border-color: #ffff00;
+            box-shadow: 0 0 20px rgba(255,204,0,0.2);
+        }
+        
+        .result-card h3 {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffcc00;
+            font-size: 1.4em;
+        }
+        
+        .result-lolos {
+            color: #ffcc00;
+        }
+        
+        .result-gagal {
+            color: #ff8800;
+        }
+        
+        .result-list {
+            list-style: none;
+            min-height: 200px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .result-list li {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,204,0,0.2);
+            font-size: 13px;
+            color: #ffdd99;
+        }
+        
+        .empty-list {
+            color: #886622;
+            text-align: center;
+            padding: 50px;
+            font-style: italic;
+            font-size: 1em;
+        }
+        
+        /* Info Panel */
+        .info-panel {
+            background: rgba(255,204,0,0.1);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px dashed #ffcc00;
+        }
+        
+        .info-panel p {
+            color: #ffcc00;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #886622;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            .result-section {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2em;
+                letter-spacing: 3px;
+            }
+            .mode-badge {
+                font-size: 1em;
+                padding: 8px 20px;
+            }
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="glow-text">🔫💛🔫</div>
+        <h1>MARGA GW</h1>
+        <div class="mode-badge">🎯 SHOTGUN 2 ONLY | CUSTOM ROOM 🎯</div>
+        <p>Official OpTes Free Fire | Shotgun 2 Only Challenge</p>
+    </div>
+    
+    <!-- Admin Section -->
+    <div class="admin-section">
+        <div class="admin-card">
+            <div class="admin-avatar">👑</div>
+            <div class="admin-name">FARZ</div>
+            <div class="admin-number">📞 +62 852-7083-0367</div>
+            <a href="https://wa.me/6285270830367" class="wa-btn" target="_blank">💬 Chat Admin FARZ</a>
+        </div>
+        <div class="admin-card">
+            <div class="admin-avatar">⚡</div>
+            <div class="admin-name">z!s KW</div>
+            <div class="admin-number">📞 +62 858-1747-7636</div>
+            <a href="https://wa.me/6285817477636" class="wa-btn" target="_blank">💬 Chat Admin z!s KW</a>
+        </div>
+    </div>
+    
+    <!-- Info Panel -->
+    <div class="info-panel">
+        <p>🏆 SHOTGUN 2 ONLY CUSTOM ROOM TRYOUT 🏆</p>
+        <p>🔥 "MOGA LU LOLOS ADMIN TUNGGU DI ALL BASE" 🔥</p>
+    </div>
+    
+    <!-- RULES OPTES -->
+    <div class="rules-section">
+        <h3>📋 RULES OPTES SHOTGUN 2 ONLY</h3>
+        <div class="rules-grid">
+            <div class="rules-box">
+                <h4>🎯 BOY SYARAT LOLOS</h4>
+                <ul>
+                    <li>✅ 11 ?-7 (LU WIN? LOLOS)</li>
+                    <li>✅ 22 ?-7 (AMBIL MVP)</li>
+                    <li>✅ 33 ?-7 (2K)</li>
+                </ul>
+            </div>
+            <div class="rules-box">
+                <h4>🏪 ROOM WAJIB</h4>
+                <ul>
+                    <li>⚠️ <span class="warning-text">CRAZY STORE</span> (kalau gatau tanya admin)</li>
+                </ul>
+            </div>
+            <div class="rules-box">
+                <h4>⚡ SKILL / HERO WAJIB</h4>
+                <div class="hero-list">
+                    <span class="hero-badge">ALOK</span>
+                    <span class="hero-badge">HAYATO</span>
+                    <span class="hero-badge">KELLY</span>
+                    <span class="hero-badge">CAROLINE</span>
+                </div>
+                <ul>
+                    <li>🐧 <span class="warning-text">PET WAJIB FALCO</span> (kalo gaada falco, kosongin)</li>
+                </ul>
+            </div>
+            <div class="rules-box">
+                <h4>🚫 DILARANG!</h4>
+                <ul>
+                    <li>❌ NO ATAP</li>
+                    <li>❌ NO LT2</li>
+                    <li>❌ NO END ANIMASI</li>
+                    <li>❌ NO TINJU</li>
+                    <li>❌ NO KBNYKAN NUNGGU</li>
+                    <li>❌ NO BELI SENJATA LAIN (KECUALI SG 2)</li>
+                    <li>❌ NO ZONA</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255,204,0,0.1); border-radius: 10px;">
+            <p style="color: #ffcc00; font-size: 1.2em; font-weight: bold;">🎯 MOGA LU LOLOS ADMIN TUNGGU DI ALL BASE!! 🎯</p>
+            <p style="color: #ffaa00;">- KANG OPTES ALL ADMIN!! -</p>
+        </div>
+    </div>
+    
+    <!-- Form OpTes -->
+    <div class="form-section">
+        <div class="form-title">
+            <span>📝 FORM OPTES SHOTGUN 2 ONLY - MARGA GW</span>
+        </div>
+        <form id="optesForm">
+            <div class="form-row">
+                <input type="text" id="nickname" placeholder="Nickname FF" required>
+                <input type="text" id="userId" placeholder="User ID FF" required>
+            </div>
+            <div class="form-row">
+                <input type="number" id="level" placeholder="Level" required>
+                <select id="hero" required>
+                    <option value="">Pilih Hero Main</option>
+                    <option value="Alok">Alok</option>
+                    <option value="Hayato">Hayato</option>
+                    <option value="Kelly">Kelly</option>
+                    <option value="Caroline">Caroline</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <select id="pet" required>
+                    <option value="">Pilih Pet</option>
+                    <option value="Falco">Falco (WAJIB)</option>
+                    <option value="Tidak Punya Falco">Tidak Punya Falco (Kosongkan)</option>
+                </select>
+                <select id="rank" required>
+                    <option value="">Pilih Rank Saat Ini</option>
+                    <option value="Bronze">Bronze</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Gold">Gold</option>
+                    <option value="Platinum">Platinum</option>
+                    <option value="Diamond">Diamond</option>
+                    <option value="Heroic">Heroic</option>
+                    <option value="Master">Master</option>
+                    <option value="Grand Master">Grand Master</option>
+                </select>
+            </div>
+            <textarea id="experience" rows="3" placeholder="Pengalaman bermain Shotgun 2 Only / Custom Room"></textarea>
+            <button type="submit" class="btn-opTes">🎯 DAFTAR OPTES SHOTGUN 2 ONLY 🎯</button>
+        </form>
+    </div>
+    
+    <!-- Result Lists (KOSONG sesuai permintaan) -->
+    <div class="result-section">
+        <div class="result-card">
+            <h3 class="result-lolos">✅ LOLOS OPTES SHOTGUN 2 ONLY</h3>
+            <div id="lolosList" class="result-list">
+                <div class="empty-list">⋆˙⟡ BELUM ADA PESERTA YANG LOLOS ⟡˙⋆</div>
+            </div>
+        </div>
+        <div class="result-card">
+            <h3 class="result-gagal">❌ TIDAK LOLOS OPTES SHOTGUN 2 ONLY</h3>
+            <div id="gagalList" class="result-list">
+                <div class="empty-list">⋆˙⟡ BELUM ADA PESERTA YANG TIDAK LOLOS ⟡˙⋆</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 MARGA GW | Official OpTes Free Fire Shotgun 2 Only Custom Room</p>
+        <p>Hasil opTes akan diumumkan oleh admin | Keputusan admin FARZ & z!s KW bersifat mutlak</p>
+        <p style="margin-top: 10px;">🔫 "NO ATAP, NO LT2, NO ZONA - SG 2 ONLY!" 🔫</p>
+    </div>
+</div>
+
+<script>
+    // Data kosong sesuai permintaan KING DIZX
+    let lolosList = [];
+    let gagalList = [];
+    
+    function renderLists() {
+        const lolosDiv = document.getElementById('lolosList');
+        const gagalDiv = document.getElementById('gagalList');
+        
+        if(lolosList.length === 0) {
+            lolosDiv.innerHTML = '<div class="empty-list">⋆˙⟡ BELUM ADA PESERTA YANG LOLOS ⟡˙⋆</div>';
+        } else {
+            lolosDiv.innerHTML = lolosList.map((item, idx) => `
+                <li>
+                    <strong>${item.nickname}</strong><br>
+                    ID: ${item.userId} | Level: ${item.level}<br>
+                    Hero: ${item.hero} | Pet: ${item.pet} | Rank: ${item.rank}<br>
+                    <small style="color:#886622">📅 ${item.date}</small>
+                </li>
+            `).join('');
+        }
+        
+        if(gagalList.length === 0) {
+            gagalDiv.innerHTML = '<div class="empty-list">⋆˙⟡ BELUM ADA PESERTA YANG TIDAK LOLOS ⟡˙⋆</div>';
+        } else {
+            gagalDiv.innerHTML = gagalList.map((item, idx) => `
+                <li>
+                    <strong>${item.nickname}</strong><br>
+                    ID: ${item.userId} | Level: ${item.level}<br>
+                    Hero: ${item.hero} | Pet: ${item.pet} | Rank: ${item.rank}<br>
+                    <small style="color:#886622">📅 ${item.date}</small>
+                </li>
+            `).join('');
+        }
+    }
+    
+    // Handle form submission
+    document.getElementById('optesForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nickname = document.getElementById('nickname').value;
+        const userId = document.getElementById('userId').value;
+        const level = document.getElementById('level').value;
+        const hero = document.getElementById('hero').value;
+        const pet = document.getElementById('pet').value;
+        const rank = document.getElementById('rank').value;
+        const experience = document.getElementById('experience').value;
+        const date = new Date().toLocaleString('id-ID');
+        
+        if(!nickname || !userId || !level || !hero || !pet || !rank) {
+            alert('⚠️ Harap isi semua data yang diperlukan!');
+            return;
+        }
+        
+        // Buat pesan WhatsApp untuk admin
+        const message = `*🔥 OPTES SHOTGUN 2 ONLY - MARGA GW 🔥*%0A%0A*📋 Data Pendaftar:*%0A%0A*Nama:* ${nickname}%0A*User ID:* ${userId}%0A*Level:* ${level}%0A*Hero:* ${hero}%0A*Pet:* ${pet}%0A*Rank:* ${rank}%0A*Pengalaman:* ${experience || '-'}%0A%0A*📅 Tanggal Daftar:* ${date}%0A%0A*"MOGA LU LOLOS ADMIN TUNGGU DI ALL BASE!"*`;
+        
+        alert(`🔫🔫🔫 PENDAFTARAN OPTES SHOTGUN 2 ONLY BERHASIL! 🔫🔫🔫\n\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n┃   📋 DATA ANDA\n┣━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n┃ Nickname: ${nickname}\n┃ User ID: ${userId}\n┃ Level: ${level}\n┃ Hero: ${hero}\n┃ Pet: ${pet}\n┃ Rank: ${rank}\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n\n📞 Hubungi admin untuk info jadwal custom room:\n👑 Admin FARZ: wa.me/6285270830367\n⚡ Admin z!s KW: wa.me/6285817477636\n\n🎯 MOGA LU LOLOS! ADMIN TUNGGU DI ALL BASE! 🎯`);
+        
+        // Reset form
+        document.getElementById('optesForm').reset();
+        
+        // Buka WhatsApp admin (opsional - uncomment jika ingin auto chat)
+        // window.open(`https://wa.me/6285270830367?text=${message}`, '_blank');
+    });
+    
+    // ========== FUNGSI ADMIN (via Console) ==========
+    
+    // Tambah hasil opTes
+    window.adminAddResult = function(status, data) {
+        const requiredFields = ['nickname', 'userId', 'level', 'hero', 'pet', 'rank'];
+        for(let field of requiredFields) {
+            if(!data[field]) {
+                console.log(`❌ Field "${field}" tidak boleh kosong!`);
+                return;
+            }
+        }
+        
+        const newData = {
+            ...data,
+            date: new Date().toLocaleString('id-ID')
+        };
+        
+        if(status === 'lolos') {
+            lolosList.push(newData);
+            console.log(`✅ LOLOS SHOTGUN 2 ONLY - ${data.nickname} ditambahkan ke list lolos`);
+        } else if(status === 'gagal') {
+            gagalList.push(newData);
+            console.log(`❌ GAGAL SHOTGUN 2 ONLY - ${data.nickname} ditambahkan ke list gagal`);
+        } else {
+            console.log('❌ Status harus "lolos" atau "gagal"');
+            return;
+        }
+        
+        renderLists();
+        console.log(`📊 STATISTIK - Lolos: ${lolosList.length} orang | Gagal: ${gagalList.length} orang`);
+    };
+    
+    // Reset list
+    window.adminResetList = function(type) {
+        if(type === 'lolos') {
+            lolosList = [];
+            console.log('✅ List LOLOS SHOTGUN 2 ONLY berhasil dikosongkan');
+        } else if(type === 'gagal') {
+            gagalList = [];
+            console.log('✅ List GAGAL SHOTGUN 2 ONLY berhasil dikosongkan');
+        } else if(type === 'all') {
+            lolosList = [];
+            gagalList = [];
+            console.log('✅ SEMUA list berhasil dikosongkan');
+        } else {
+            console.log('❌ Gunakan: adminResetList("lolos") / "gagal" / "all"');
+            return;
+        }
+        renderLists();
+    };
+    
+    // Lihat semua data
+    window.adminShowData = function() {
+        console.log('\n╔════════════════════════════════════════════╗');
+        console.log('║   📊 DATA OPTES SHOTGUN 2 ONLY           ║');
+        console.log('║         MARGA GW                         ║');
+        console.log('╠════════════════════════════════════════════╣');
+        console.log(`║ ✅ LOLOS : ${lolosList.length} orang`);
+        console.log(`║ ❌ GAGAL : ${gagalList.length} orang`);
+        console.log('╠════════════════════════════════════════════╣');
+        console.log('║ 📋 DETAIL LOLOS:');
+        if(lolosList.length === 0) console.log('║    (kosong)');
+        else lolosList.forEach((item, i) => console.log(`║    ${i+1}. ${item.nickname} - ${item.userId}`));
+        console.log('╠════════════════════════════════════════════╣');
+        console.log('║ 📋 DETAIL GAGAL:');
+        if(gagalList.length === 0) console.log('║    (kosong)');
+        else gagalList.forEach((item, i) => console.log(`║    ${i+1}. ${item.nickname} - ${item.userId}`));
+        console.log('╚════════════════════════════════════════════╝\n');
+    };
+    
+    // Hapus peserta tertentu
+    window.adminRemoveParticipant = function(status, index) {
+        if(status === 'lolos') {
+            if(index >= 0 && index < lolosList.length) {
+                const removed = lolosList[index];
+                lolosList.splice(index, 1);
+                renderLists();
+                console.log(`✅ Dihapus dari LOLOS: ${removed.nickname}`);
+            } else {
+                console.log('❌ Index tidak valid');
+            }
+        } else if(status === 'gagal') {
+            if(index >= 0 && index < gagalList.length) {
+                const removed = gagalList[index];
+                gagalList.splice(index, 1);
+                renderLists();
+                console.log(`✅ Dihapus dari GAGAL: ${removed.nickname}`);
+            } else {
+                console.log('❌ Index tidak valid');
+            }
+        } else {
+            console.log('❌ Status harus "lolos" atau "gagal"');
+        }
+    };
+    
+    // Render awal
+    renderLists();
+    
+    // Console welcome message
+    console.log('\n╔══════════════════════════════════════════════════════════════════╗');
+    console.log('║   🔫🔫🔫 MARGA GW - OPTES SHOTGUN 2 ONLY ACTIVE 🔫🔫🔫        ║');
+    console.log('╠══════════════════════════════════════════════════════════════════╣');
+    console.log('║   👑 ADMIN FARZ     : wa.me/6285270830367                        ║');
+    console.log('║   ⚡ ADMIN z!s KW   : wa.me/6285817477636                        ║');
+    console.log('╠══════════════════════════════════════════════════════════════════╣');
+    console.log('║   📌 COMMANDS FOR ADMIN (via Console):                           ║');
+    console.log('║                                                                   ║');
+    console.log('║   adminAddResult("lolos", {                                     ║');
+    console.log('║       nickname: "User", userId: "123", level: "80",            ║');
+    console.log('║       hero: "Alok", pet: "Falco", rank: "Grand Master"         ║');
+    console.log('║   })                                                             ║');
+    console.log('║                                                                   ║');
+    console.log('║   adminResetList("lolos") / "gagal" / "all"                     ║');
+    console.log('║   adminShowData()                                                ║');
+    console.log('║   adminRemoveParticipant("lolos", 0)                             ║');
+    console.log('╠══════════════════════════════════════════════════════════════════╣');
+    console.log('║   🎯 "MOGA LU LOLOS ADMIN TUNGGU DI ALL BASE!" 🎯               ║');
+    console.log('║   🔫 NO ATAP | NO LT2 | NO ZONA | SG 2 ONLY! 🔫                  ║');
+    console.log('╚══════════════════════════════════════════════════════════════════╝\n');
+</script>
+</body>
+</html>
